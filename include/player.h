@@ -14,13 +14,12 @@ typedef struct player_t {
 	Vector3 position;
 	float height;
 	float walk_speed;
+	float sprint_multiplier;
 } player_t;
-
-// Player struct
-player_t *player;
 
 // Prototypes
 int init_player();
-int update_camera(Vector2 mouse_delta);
+int update_position();
+int update_camera();
 
 #endif

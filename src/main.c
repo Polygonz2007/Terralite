@@ -22,49 +22,49 @@
 // END OF INCLUDES
 
 
-// Colors
-#define NIGHTBLUE (Color){ 10, 20, 70, 255 }
-#define MILDWHITE (Color){ 255, 255, 255, 200 }
+// Externs
+extern player_t player;
 
-// Keep the code clean, make sure to move all prototypes / global variables / structs etc. in includes.
 
 // Main
 int main() {
 	// Window
 	vec2u16_t window_size = { 1280, 720 };
 	InitWindow(window_size.x, window_size.y, "Terralite");
-
+	SetTargetFPS(144);
 	DisableCursor();
-	SetTargetFPS(240);
-	SetConfigFlags(FLAG_MSAA_4X_HINT);
-	SetConfigFlags(FLAG_VSYNC_HINT);
 
-	printf("%f", player->camera_sensitivity);
+	// Audio
+	InitAudioDevice();
+
 
 	// Player / Camera
 	init_player();
 
 	_Bool running = true;
 	while (running) {
-		// Get data
-		Vector2 mouse_delta = GetMouseDelta();
-
 		// Draw!
 		BeginDrawing();
-
-		ClearBackground(NIGHTBLUE);
-		DrawText("Terralite", 8, 8, 30, MILDWHITE);
+		ClearBackground(BLACK);
 
 		// Move player and update camera
-		// movement
-		update_camera(mouse_delta);
+		update_position();
+		update_camera();
 
 		// 3D
-		BeginMode3D(player->camera);
+		BeginMode3D(player.camera);
 
-		DrawCapsuleWires((Vector3) { 0, 0, 0 }, (Vector3) { 0, 7, 0 }, 4, 12, 6, WHITE);
+		DrawGrid(16, 1.0f);
 
 		EndMode3D();
+
+		// Text
+		DrawText("Terralite", 8, 8, 30, MAROON);
+	
+		char framerate_text[32];
+		snprintf(framerate_text, 31, "Framerate: %d", GetFPS());
+		DrawText(framerate_text, 8, 42, 20, DARKGREEN);
+
 		EndDrawing();
 
 		// Window
