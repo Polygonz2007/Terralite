@@ -28,28 +28,41 @@
 
 // Keep the code clean, make sure to move all prototypes / global variables / structs etc. in includes.
 
-
 // Main
 int main() {
 	// Window
 	vec2u16_t window_size = { 1280, 720 };
-	InitWindow(window_size.x, window_size.y, "Teralite");
+	InitWindow(window_size.x, window_size.y, "Terralite");
+
+	DisableCursor();
+	SetTargetFPS(240);
+	SetConfigFlags(FLAG_MSAA_4X_HINT);
+	SetConfigFlags(FLAG_VSYNC_HINT);
+
+	printf("%f", player->camera_sensitivity);
 
 	// Player / Camera
 	init_player();
 
 	_Bool running = true;
 	while (running) {
+		// Get data
+		Vector2 mouse_delta = GetMouseDelta();
+
+		// Draw!
 		BeginDrawing();
 
 		ClearBackground(NIGHTBLUE);
 		DrawText("Terralite", 8, 8, 30, MILDWHITE);
 
-		// 3D
-		player.camera.position = (Vector3){ cos(GetTime()) * 20.0f, 10.0f, sin(GetTime()) * 20.0f};
-		BeginMode3D(player.camera);
+		// Move player and update camera
+		// movement
+		update_camera(mouse_delta);
 
-		DrawCube((Vector3) { 0, 0, 0 }, 10, 10, 10, WHITE);
+		// 3D
+		BeginMode3D(player->camera);
+
+		DrawCapsuleWires((Vector3) { 0, 0, 0 }, (Vector3) { 0, 7, 0 }, 4, 12, 6, WHITE);
 
 		EndMode3D();
 		EndDrawing();
