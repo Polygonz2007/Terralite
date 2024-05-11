@@ -15,6 +15,7 @@
 #include <vec3.h>
 
 // Gameplay
+#include <meshgen.h>
 // terrain
 #include <player.h>
 // physics (using math and vectors)
@@ -30,6 +31,7 @@ extern player_t player;
 int main() {
 	// Window
 	vec2u16_t window_size = { 1280, 720 };
+	_Bool fullscreen = false;
 	InitWindow(window_size.x, window_size.y, "Terralite");
 	SetTargetFPS(144);
 	DisableCursor();
@@ -40,6 +42,14 @@ int main() {
 
 	// Player / Camera
 	init_player();
+
+	// Mesh test
+	meshgen_t meshgen = new_mesh(1);
+	add_vert(meshgen, 0, 0, 0, 0, 0, 0, 1.0f, 0);
+	add_vert(meshgen, 1.0f, 0, 0.5f, 1.0f, 0.5f, 0, 1.0f, 0);
+	add_vert(meshgen, 0, 0, 1.0f, 0, 1.0f, 0, 1.0f, 0);
+	Mesh mesh = generate_mesh(meshgen);
+	Model model = LoadModelFromMesh(mesh);
 
 	_Bool running = true;
 	while (running) {
@@ -55,6 +65,7 @@ int main() {
 		BeginMode3D(player.camera);
 
 		DrawGrid(16, 1.0f);
+		DrawModel(model, (Vector3) { 0, 0, 0 }, 1.0f, WHITE);
 
 		EndMode3D();
 
@@ -70,6 +81,10 @@ int main() {
 		// Window
 		if (WindowShouldClose())
 			running = false;
+
+		if (GetKeyPressed(KEY_F11)) {
+			fullscreen = !fullscreen;
+		}
 	}
 
 	CloseWindow();

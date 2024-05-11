@@ -134,9 +134,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\meshgen\meshgen.c" />
     <ClCompile Include="src\player.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\meshgen.h" />
     <ClInclude Include="include\player.h" />
     <ClInclude Include="include\vec2.h" />
     <ClInclude Include="include\vec3.h" />
