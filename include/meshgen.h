@@ -17,7 +17,8 @@ typedef struct meshgen_t {
 } meshgen_t;
 
 meshgen_t new_mesh(uint16_t num_tris); // Mallocates memory for the mesh and sets up data for mesh
-int add_vert(meshgen_t meshgen, float x, float y, float z, float u, float v, float nx, float ny, float nz); // Add verticie to mesh
+int add_vert(meshgen_t *meshgen, float x, float y, float z, float u, float v, float nx, float ny, float nz); // Add verticie to mesh
 Mesh generate_mesh(meshgen_t src);
+Model generate_model(meshgen_t src);
 
 #endif

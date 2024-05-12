@@ -24,6 +24,12 @@
     <ClCompile Include="src\meshgen\meshgen.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\meshgen\terrain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\noise.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\vec2.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\meshgen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\terrain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

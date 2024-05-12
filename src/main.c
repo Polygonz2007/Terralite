@@ -43,13 +43,8 @@ int main() {
 	// Player / Camera
 	init_player();
 
-	// Mesh test
-	meshgen_t meshgen = new_mesh(1);
-	add_vert(meshgen, 0, 0, 0, 0, 0, 0, 1.0f, 0);
-	add_vert(meshgen, 1.0f, 0, 0.5f, 1.0f, 0.5f, 0, 1.0f, 0);
-	add_vert(meshgen, 0, 0, 1.0f, 0, 1.0f, 0, 1.0f, 0);
-	Mesh mesh = generate_mesh(meshgen);
-	Model model = LoadModelFromMesh(mesh);
+	
+
 
 	_Bool running = true;
 	while (running) {
@@ -65,7 +60,7 @@ int main() {
 		BeginMode3D(player.camera);
 
 		DrawGrid(16, 1.0f);
-		DrawModel(model, (Vector3) { 0, 0, 0 }, 1.0f, WHITE);
+		DrawModel(model, (Vector3) { 0.0f, 0.0f, 0.0f }, 1.0f, DARKPURPLE);
 
 		EndMode3D();
 
@@ -87,5 +82,6 @@ int main() {
 		}
 	}
 
+	UnloadModel(model);
 	CloseWindow();
 }

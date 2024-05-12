@@ -10,6 +10,8 @@ meshgen_t new_mesh(uint16_t num_tris) {
 	mg.num_tris = num_tris;
 	mg.current_index = 0;
 
+	printf("Init mesh with %d verticies.\n", mg.num_tris * 3);
+
 	const size_t size = mg.num_tris * sizeof(float);
 	mg.verts = malloc(size * 3 * 3);
 	mg.uvs = malloc(size * 2 * 3);
@@ -27,16 +29,15 @@ int add_vert(meshgen_t *meshgen, float x, float y, float z, float u, float v, fl
 	meshgen->verts[ind3 + 1] = y;
 	meshgen->verts[ind3 + 2] = z;
 
-	meshgen->verts[ind2 + 0] = u;
-	meshgen->verts[ind2 + 1] = v;
+	meshgen->uvs[ind2 + 0] = u;
+	meshgen->uvs[ind2 + 1] = v;
 
-	meshgen->verts[ind3 + 0] = nx;
-	meshgen->verts[ind3 + 1] = ny;
-	meshgen->verts[ind3 + 2] = nz;
+	meshgen->normals[ind3 + 0] = nx;
+	meshgen->normals[ind3 + 1] = ny;
+	meshgen->normals[ind3 + 2] = nz;
 
+	printf("Added vert %d at %f, %f, %f\n", meshgen->current_index, x, y, z);
 	meshgen->current_index++;
-
-	printf("Added vert %d\n", meshgen->current_index);
 
 	return 0;
 }
@@ -55,4 +56,12 @@ Mesh generate_mesh(meshgen_t src) {
 	printf("Mesh uploaded!\n");
 
 	return mesh;
+}
+
+Model generate_model(meshgen_t src) {
+	Mesh mesh = generate_mesh(src);
+	Model model = LoadModelFromMesh(mesh);
+	printf("Model generated.\n");
+
+	return model;
 }
