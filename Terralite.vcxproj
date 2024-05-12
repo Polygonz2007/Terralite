@@ -74,7 +74,7 @@
     <IncludePath>C:\Users\skfro\source\repos\Polygonz2007\Terralite\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\skfro\source\repos\Polygonz2007\Terralite\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\skfro\source\repos\Polygonz2007\Terralite\include;C:\Users\Polygonz\source\repos\Polygonz2007\Terralite\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

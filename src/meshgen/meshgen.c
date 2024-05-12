@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <stddef.h>
+#include <stdint.h>
 #include <meshgen.h>
 
 meshgen_t new_mesh(uint16_t num_tris) {

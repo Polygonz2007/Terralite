@@ -60,7 +60,7 @@ int main() {
 		BeginMode3D(player.camera);
 
 		DrawGrid(16, 1.0f);
-		DrawModel(model, (Vector3) { 0.0f, 0.0f, 0.0f }, 1.0f, DARKPURPLE);
+		//DrawModel(model, (Vector3) { 0.0f, 0.0f, 0.0f }, 1.0f, DARKPURPLE);
 
 		EndMode3D();
 
@@ -82,6 +82,6 @@ int main() {
 		}
 	}
 
-	UnloadModel(model);
+	//UnloadModel(model);
 	CloseWindow();
 }
