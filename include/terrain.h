@@ -14,13 +14,24 @@ enum chunk_status {
 	CHUNK_LOADED_MODEL
 };
 
-typedef struct terrain_h {
+typedef struct terrain_t {
+	// Memory
 	uint8_t *chunk_status;
 	vec2i16_t *chunk_locs;
 	Model *chunk_models;
-} terrain_h;
+	float *chunk_gen_buffer;
+
+	// Settings
+	vec2u8_t chunk_size;
+	uint8_t render_distance;
+	uint16_t tot_chunks;
+
+	// Textures
+	Texture texture;
+} terrain_t;
 
 int init_terrain();
+int free_terrain();
 Model generate_chunk(vec2i16_t chunk_pos);
 
 #endif

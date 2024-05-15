@@ -40,7 +40,7 @@ int update_position() {
 	if ((w && a) || (w && d) || (s && a) || (s && d))
 		speed *= 0.707f;
 
-	if (IsKeyDown(KEY_LEFT_SHIFT))
+	if (IsKeyDown(KEY_LEFT_CONTROL))
 		speed *= player.sprint_multiplier;
 
 	// Apply movement
@@ -67,6 +67,13 @@ int update_position() {
 		player.position.x += speed * dt * -ym; 
 		player.position.z += speed * dt * xm; 
 	}
+
+	// Flight
+	if (IsKeyDown(KEY_SPACE))
+		player.position.y += 2.0f * dt;
+
+	if (IsKeyDown(KEY_LEFT_SHIFT))
+		player.position.y -= 2.0f * dt;
 
 	return 0;
 }

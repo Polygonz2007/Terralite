@@ -22,7 +22,7 @@ meshgen_t new_mesh(uint16_t num_tris) {
 }
 
 int add_vert(meshgen_t *meshgen, float x, float y, float z, float u, float v, float nx, float ny, float nz) {
-	const uint16_t index = meshgen->current_index;
+	const uint32_t index = meshgen->current_index;
 	const uint32_t ind3 = index * 3;
 	const uint32_t ind2 = index * 2;
 
@@ -37,7 +37,6 @@ int add_vert(meshgen_t *meshgen, float x, float y, float z, float u, float v, fl
 	meshgen->normals[ind3 + 1] = ny;
 	meshgen->normals[ind3 + 2] = nz;
 
-	printf("Added vert %d at %f, %f, %f\n", meshgen->current_index, x, y, z);
 	meshgen->current_index++;
 
 	return 0;

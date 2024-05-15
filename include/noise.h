@@ -2,6 +2,7 @@
 #define NOISE_H
 
 #include <stdint.h>
+#include <vec2.h>
 
 typedef struct noise_t {
 	vec2i16_t chunk_pos;
@@ -18,6 +19,6 @@ enum noise_type {
 	NOISE_PERLIN_OCTAVES
 };
 
-double sample_noise(float x, float z);
+float sample_perlin(float x, float z, float freq, int depth);
 
 #endif

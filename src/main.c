@@ -16,7 +16,7 @@
 
 // Gameplay
 #include <meshgen.h>
-// terrain
+#include <terrain.h>
 #include <player.h>
 // physics (using math and vectors)
 
@@ -40,11 +40,12 @@ int main() {
 	InitAudioDevice();
 
 
-	// Player / Camera
+	// Initiation
 	init_player();
+	init_terrain();
 
-	
-
+	// generate test chunk
+	Model chunk = generate_chunk((vec2i16_t) { 0, 0 });
 
 	_Bool running = true;
 	while (running) {
@@ -60,7 +61,7 @@ int main() {
 		BeginMode3D(player.camera);
 
 		DrawGrid(16, 1.0f);
-		//DrawModel(model, (Vector3) { 0.0f, 0.0f, 0.0f }, 1.0f, DARKPURPLE);
+		DrawModel(chunk, (Vector3) { 0, 0, 0 }, 1.0f, WHITE);
 
 		EndMode3D();
 
@@ -82,6 +83,10 @@ int main() {
 		}
 	}
 
-	//UnloadModel(model);
+	UnloadModel(chunk);
+
+	// Free
+	free_terrain();
+
 	CloseWindow();
 }

@@ -12,8 +12,8 @@ typedef struct meshgen_t {
 	float *uvs;
 	float *normals;
 
-	uint16_t num_tris;
-	uint16_t current_index;
+	uint32_t num_tris;
+	uint32_t current_index;
 } meshgen_t;
 
 meshgen_t new_mesh(uint16_t num_tris); // Mallocates memory for the mesh and sets up data for mesh
