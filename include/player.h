@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <raylib.h>
+#include <vec2.h>
 
 typedef struct player_t {
 	// Camera
@@ -15,6 +16,9 @@ typedef struct player_t {
 	float height;
 	float walk_speed;
 	float sprint_multiplier;
+
+	// Chunks n' stuff
+	vec2i16_t chunk_pos;
 } player_t;
 
 // Prototypes

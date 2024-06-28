@@ -10,8 +10,9 @@
 
 enum chunk_status {
 	CHUNK_UNLOADED,
+	CHUNK_LOADING,
 	CHUNK_LOADED,
-	CHUNK_LOADED_MODEL
+	CHUNK_LOADED_OBJECTS
 };
 
 typedef struct terrain_t {
@@ -28,10 +29,19 @@ typedef struct terrain_t {
 
 	// Textures
 	Texture texture;
+
+	// Info
+	uint32_t chunks_loaded;
 } terrain_t;
 
 int init_terrain();
 int free_terrain();
+
+int32_t get_chunk_index(vec2i16_t chunk_pos);
+int load_chunk(vec2i16_t chunk_pos);
+int unload_chunk(vec2i16_t chunk_pos);
+
 Model generate_chunk(vec2i16_t chunk_pos);
+int update_chunks();
 
 #endif

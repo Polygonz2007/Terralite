@@ -22,9 +22,14 @@
 
 // END OF INCLUDES
 
+// Defenitions
+#define WATER (Color) { 0, 121, 241, 196 }
+
+
 
 // Externs
 extern player_t player;
+extern terrain_t terrain;
 
 
 // Main
@@ -39,19 +44,16 @@ int main() {
 	// Audio
 	InitAudioDevice();
 
-
 	// Initiation
 	init_player();
 	init_terrain();
 
-	// generate test chunk
-	Model chunk = generate_chunk((vec2i16_t) { 0, 0 });
 
 	_Bool running = true;
 	while (running) {
 		// Draw!
 		BeginDrawing();
-		ClearBackground(BLACK);
+		ClearBackground(SKYBLUE);
 
 		// Move player and update camera
 		update_position();
@@ -60,8 +62,16 @@ int main() {
 		// 3D
 		BeginMode3D(player.camera);
 
-		DrawGrid(16, 1.0f);
-		DrawModel(chunk, (Vector3) { 0, 0, 0 }, 1.0f, WHITE);
+		DrawPlane((Vector3) { player.position.x, 0.0f, player.position.z }, (Vector2) { 256.0f, 256.0f }, WATER);
+		
+		for (size_t i = 0; i < terrain.tot_chunks; ++i) {
+			if (terrain.chunk_status[i] == CHUNK_LOADED) {
+				vec2i16_t chunk_pos = terrain.chunk_locs[i];
+				Vector3 pos = { chunk_pos.x * 16.0f, 0.0f, chunk_pos.y * 16.0f };
+
+				DrawModel(terrain.chunk_models[i], pos, 16.0f, WHITE);
+			}
+		}
 
 		EndMode3D();
 
@@ -82,9 +92,7 @@ int main() {
 			fullscreen = !fullscreen;
 		}
 	}
-
-	UnloadModel(chunk);
-
+	
 	// Free
 	free_terrain();
 

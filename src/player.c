@@ -3,6 +3,10 @@
 #include <raylib.h>
 #include <math.h>
 
+// Terrain
+#include <terrain.h>
+extern terrain_t terrain;
+
 // Player struct
 player_t player;
 
@@ -74,6 +78,20 @@ int update_position() {
 
 	if (IsKeyDown(KEY_LEFT_SHIFT))
 		player.position.y -= 2.0f * dt;
+
+
+	// If we moved into a new chunk call the YAHOO function
+	const vec2i16_t new_chunk_pos = (vec2i16_t){
+		floor(player.position.x / (float)terrain.chunk_size.x),
+		floor(player.position.z / (float)terrain.chunk_size.y)
+	};
+
+	if (!(player.chunk_pos.x == new_chunk_pos.x && player.chunk_pos.y == new_chunk_pos.y)) {
+		// Update chunks and chunk_pos
+		update_chunks();
+		printf("upadting chunkes");
+		player.chunk_pos = new_chunk_pos;
+	}
 
 	return 0;
 }
