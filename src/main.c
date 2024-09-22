@@ -69,7 +69,7 @@ int main() {
 				vec2i16_t chunk_pos = terrain.chunk_locs[i];
 				Vector3 pos = { chunk_pos.x * 16.0f, 0.0f, chunk_pos.y * 16.0f };
 
-				DrawModel(terrain.chunk_models[i], pos, 16.0f, WHITE);
+				DrawModel(terrain.chunk_models[i], pos, 1.0f, WHITE);
 			}
 		}
 

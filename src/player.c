@@ -21,7 +21,7 @@ int init_player() {
 
 	// Body
 	player.height = 1.83f;
-	player.walk_speed = 2.0f;
+	player.walk_speed = 20.0f;
 	player.sprint_multiplier = 2.4f;
 	player.position = (Vector3) { 0.0f, 0.0f, 0.0f };
 

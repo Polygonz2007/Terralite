@@ -15,6 +15,7 @@ terrain_t terrain;
 extern player_t player;
 
 int init_terrain() {
+	printf("hola");
 	terrain.chunk_size = (vec2u8_t) { 16, 16 };
 	terrain.render_distance = 8;
 	
@@ -60,6 +61,7 @@ int32_t get_chunk_index(vec2i16_t chunk_pos) {
 }
 
 int32_t next_chunk_index() {
+	printf("hello");
 	for (size_t i = 0; i < terrain.tot_chunks; ++i) {
 		if (terrain.chunk_status[i] == CHUNK_UNLOADED)
 			return i;
@@ -103,13 +105,12 @@ int unload_chunk(vec2i16_t chunk_pos) {
 
 Model generate_chunk(vec2i16_t chunk_pos) {
 	// Set up noise
-	noise.chunk_pos = chunk_pos;
-	noise.type = NOISE_PERLIN_OCTAVES;
+	const vec2i16_t chunk_offset = { chunk_pos.x * terrain.chunk_size.x, chunk_pos.y * terrain.chunk_size.y };
 
 	// Load heighmap
 	for (size_t x = 0; x < terrain.chunk_size.x + 1; ++x) {
 		for (size_t y = 0; y < terrain.chunk_size.y + 1; ++y) {
-			terrain.chunk_gen_buffer[x + (y * terrain.chunk_size.x)] = 30.0f - sample_perlin(x, y, 0.02f, 3) * 42.0f;
+			terrain.chunk_gen_buffer[x + (y * terrain.chunk_size.x)] = 30.0f - sample_perlin(chunk_offset.x + x, chunk_offset.y + y, 0.02f, 3) * 42.0f;
 		}
 	}
 
@@ -163,9 +164,8 @@ int update_chunks() {
 		for (int16_t chunk_y = player.chunk_pos.y - rd; chunk_y < player.chunk_pos.y + rd; ++chunk_y) {
 			const vec2i16_t chunk_pos = (vec2i16_t){ chunk_x, chunk_y };
 			const int32_t chunk_index = get_chunk_index((vec2i16_t) { chunk_x, chunk_y });
-
-			if (terrain.chunk_status[chunk_index] == CHUNK_UNLOADED)
-				load_chunk(chunk_pos);
+			
+			load_chunk(chunk_pos);
 		}
 	}
 }
